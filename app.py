@@ -10,9 +10,10 @@ from app_pages.page_decision_tree import page_decision_tree_body
 from app_pages.page_random_forest import page_random_forest_body
 from app_pages.page_model_performance import page_model_performance_body
 
-app = MultiPage(app_name="advertising_analysis")  # Create an instance of the app
+# Create an instance of the app
+app = MultiPage(app_name="advertising_analysis")
 
-# App pages 
+# App pages
 app.add_page("JWS Business Requirement", page_jws_requirements_body)
 app.add_page("Data Overview ", page_data_overview_body)
 app.add_page("Univariate Analysis", page_univariate_analysis_body)
