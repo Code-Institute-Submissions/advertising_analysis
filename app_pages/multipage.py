@@ -17,8 +17,9 @@ class MultiPage:
         self.pages.append({"title": title, "function": func})
 
     def run(self):
-        st.markdown(
-            "<h1 style='color: darkcyan;'>Advertising Analysis App</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='color: darkcyan;'>"
+                    "Advertising Analysis App"
+                    "</h1>", unsafe_allow_html=True)
         page = st.sidebar.radio(
             'Menu', self.pages, format_func=lambda page: page['title'])
         page['function']()
