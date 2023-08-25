@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the data
-data = pd.read_csv(
-    '/workspaces/advertising_analysis/jupyter_notebooks/advertising_dataset.csv')
+data = pd.read_csv('/workspaces/advertising_analysis/'
+                   'jupyter_notebooks/advertising_dataset.csv')
 
 # Function to plot a boxplot and a histogram along the same scale.
 
@@ -30,13 +30,13 @@ def histogram_boxplot(data, feature):
 
 def labeled_barplot(data, feature, perc=False, n=None):
     total = len(data[feature])
-    count = data[feature].nunique()
 
     fig, ax = plt.subplots(figsize=(10, 5))  # Use consistent figsize
 
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=15)
     sns.countplot(data=data, x=feature, palette="Paired",
-                  order=data[feature].value_counts().index[:n].sort_values(), ax=ax)
+                  order=data[feature].value_counts().index[:n].sort_values(),
+                  ax=ax)
 
     for p in ax.patches:
         if perc:
@@ -67,13 +67,16 @@ def page_univariate_analysis_body():
 
     # Display observations on age
     st.subheader("Observations on Age")
-    st.write("An observation of age shows an average of approximately 46 years, "
-             "with a standard deviation of 13.16. The minimum age is 18, and the "
-             "maximum age is 63. This is shown visually below:")
+    st.write("Observation of age shows an average of approximately 46 years, "
+             "with a standard deviation of 13.16. The minimum age is 18, and "
+             "the maximum age is 63. This is shown visually below:")
     histogram_boxplot(data, "age")
 
     # Display observations on website visits
     st.subheader("Observations on Website Visits")
+    st.write("On average, each individual has 3.57 website visits, "
+             "with a standard deviation of 2.83. "
+             "The maximum number of visits is 30 as shown below:")
     histogram_boxplot(data, "website_visits")
 
     # Display the number of leads that haven't visited the website
@@ -82,41 +85,58 @@ def page_univariate_analysis_body():
 
     # Display observations on time spent on website
     st.subheader("Observations on Time Spent on Website")
+    st.write("The average time spent on the website is 724.01 units (time "
+             "unit not specified), with a standard "
+             " deviation of 743.83. The minimum time spent is 0, the maximum "
+             "time spent is 2,537 units. This is evidenced below:")
     histogram_boxplot(data, "time_spent_on_website")
 
     # Display observations on page views per visit
     st.subheader("Observations on Page Views per Visit")
+    st.write("Page Views per visit on average results in 3.03 page views and, "
+             "a standard deviation of 1.97. The maximum is 18.43 as shown:")
     histogram_boxplot(data, "page_views_per_visit")
 
     # Display labeled barplots with consistent image size and text size
     st.subheader("Observations on Current Occupation")
+    st.write("A breakdown of demographics is shown visually in bar graphs "
+             "below:")
     labeled_barplot(data, "current_occupation", perc=True)
 
     st.subheader("Observations on First Interaction")
+    st.write("First Interaction:")
     labeled_barplot(data, "first_interaction", perc=True)
 
     st.subheader("Observations on Profile Completed")
+    st.write("Profile Completion:")
     labeled_barplot(data, "profile_completed", perc=True)
 
     st.subheader("Observations on Last Activity")
+    st.write("Last Activity:")
     labeled_barplot(data, "last_activity", perc=True)
 
     st.subheader("Observations on Print Media Type 1")
+    st.write("Media Usage:")
     labeled_barplot(data, "print_media_type1", perc=True)
 
     st.subheader("Observations on Print Media Type 2")
+    st.write("Media Usage:")
     labeled_barplot(data, "print_media_type2", perc=True)
 
     st.subheader("Observations on Digital Media")
+    st.write("Media Usage:")
     labeled_barplot(data, "digital_media", perc=True)
 
     st.subheader("Observations on Educational Channels")
+    st.write("Educational Channels:")
     labeled_barplot(data, "educational_channels", perc=True)
 
     st.subheader("Observations on Referral")
+    st.write("Referral:")
     labeled_barplot(data, "referral", perc=True)
 
     st.subheader("Observations on Status")
+    st.write("Status:")
     labeled_barplot(data, "status", perc=True)
 
 
