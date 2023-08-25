@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-# Load your data here, replace 'data.csv' with your actual data source
-data = pd.read_csv(
-    '/workspaces/advertising_analysis/jupyter_notebooks/advertising_dataset.csv')
+# Load the data
+data = pd.read_csv('/workspaces/advertising_analysis/'
+                   'jupyter_notebooks/advertising_dataset.csv')
 
 
 def page_data_overview_body():
@@ -27,7 +27,8 @@ def page_data_overview_body():
     st.write("- Referral")
     st.write("- Status")
 
-    st.write("The dataset contains information on 4,612 records with 0 duplicates.")
+    st.write("The dataset contains information on 4,612 records with 0 "
+             "duplicates.")
 
     # Display the first and last 5 rows of the loaded data
     st.write("Top 5 rows of the data:")
@@ -37,7 +38,7 @@ def page_data_overview_body():
     st.dataframe(data.tail(5))
 
     # Display the statistical summary
-    st.write("The statistical summary of the data is as follows.")
+    st.write("The statistical summary of the data is as follows:")
     st.dataframe(data.describe())
 
 
