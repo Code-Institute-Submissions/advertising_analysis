@@ -11,12 +11,6 @@ data = pd.read_csv(
 
 
 def histogram_boxplot(data, feature):
-    """
-    Display a combined histogram and boxplot for a given feature.
-
-    data: dataframe
-    feature: dataframe column
-    """
     fig, axes = plt.subplots(1, 2, figsize=(10, 5))
 
     sns.histplot(data=data, x=feature, bins=20, kde=True, ax=axes[0])
@@ -31,24 +25,14 @@ def histogram_boxplot(data, feature):
     plt.tight_layout()
     st.pyplot(fig)
 
-# Function to create labeled barplots
+# Function to create labeled barplots with consistent image size and text size
 
 
 def labeled_barplot(data, feature, perc=False, n=None):
-    """
-    Barplot with percentage at the top
-
-    data: dataframe
-    feature: dataframe column
-    perc: whether to display percentages instead of count (default is False)
-    n: displays the top n category levels (default is None, i.e., display all levels)
-    """
     total = len(data[feature])
     count = data[feature].nunique()
-    if n is None:
-        fig, ax = plt.subplots(figsize=(count + 1, 5))
-    else:
-        fig, ax = plt.subplots(figsize=(n + 1, 5))
+
+    fig, ax = plt.subplots(figsize=(10, 5))  # Use consistent figsize
 
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=15)
     sns.countplot(data=data, x=feature, palette="Paired",
@@ -83,6 +67,9 @@ def page_univariate_analysis_body():
 
     # Display observations on age
     st.subheader("Observations on Age")
+    st.write("An observation of age shows an average of approximately 46 years, "
+             "with a standard deviation of 13.16. The minimum age is 18, and the "
+             "maximum age is 63. This is shown visually below:")
     histogram_boxplot(data, "age")
 
     # Display observations on website visits
@@ -101,7 +88,7 @@ def page_univariate_analysis_body():
     st.subheader("Observations on Page Views per Visit")
     histogram_boxplot(data, "page_views_per_visit")
 
-    # Display labeled barplots
+    # Display labeled barplots with consistent image size and text size
     st.subheader("Observations on Current Occupation")
     labeled_barplot(data, "current_occupation", perc=True)
 
