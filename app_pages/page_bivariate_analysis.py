@@ -23,18 +23,24 @@ def page_bivariate_analysis_body():
     if len(selected_columns) >= 2:
         # Display a scatter plot for selected variables
         sns.set(style="whitegrid")
-        sns.pairplot(data[selected_columns])
-        st.pyplot()
+        pairplot = sns.pairplot(data[selected_columns])
+        st.pyplot(pairplot.fig)  # Pass the figure explicitly to st.pyplot()
 
         # Display the heatmap of correlations
         cols_list = data[selected_columns].select_dtypes(
             include=np.number).columns.tolist()
-        plt.figure(figsize=(12, 7))
+        heatmap_fig, heatmap_ax = plt.subplots(figsize=(12, 7))
         sns.heatmap(
             data[selected_columns][cols_list].corr(), annot=True, vmin=-1,
-            vmax=1, fmt=".2f", cmap="Spectral"
+            vmax=1, fmt=".2f", cmap="Spectral",
+            ax=heatmap_ax
         )
-        st.pyplot()
+        st.pyplot(heatmap_fig)  # Pass the figure explicitly to st.pyplot()
 
     else:
         st.write("Select at least two columns for bivariate analysis.")
+
+
+# Run the Streamlit app
+if __name__ == "__main__":
+    page_bivariate_analysis_body()
