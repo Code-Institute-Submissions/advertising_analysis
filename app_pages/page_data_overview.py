@@ -20,12 +20,12 @@ def page_data_overview_body():
     st.write("- Time Spent on Website")
     st.write("- Page Views per Visit")
     st.write("- Last Activity")
-    st.write("- Print Media Type1")
-    st.write("- Print Media Type2")
-    st.write("- Digital Media")
-    st.write("- Educational Channels")
-    st.write("- Referral")
-    st.write("- Status")
+    st.write("- Print Media Type1 - Ads in Newpapers")
+    st.write("- Print Media Type2 - Ads in Magazines")
+    st.write("- Digital Media - Ads online")
+    st.write("- Educational Channels - Ads on forums, threads, newsletters")
+    st.write("- Referral - referred to JWS or not")
+    st.write("- Status - converted to a paid customer or not")
 
     st.write("The dataset contains information on 4,612 records with 0 "
              "duplicates.")
