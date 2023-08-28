@@ -63,7 +63,7 @@ def metrics_score(actual, predicted):
                 'Not Converted', 'Converted'], yticklabels=['Not Converted', 'Converted'])
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
-    st.pyplot()
+    st.pyplot(plt.gcf())  # Explicitly pass the figure
 
 
 def page_decision_tree_body():
@@ -78,7 +78,7 @@ def page_decision_tree_body():
         plt.boxplot(data[variable], whis=1.5)
         plt.tight_layout()
         plt.title(variable)
-    st.pyplot()
+    st.pyplot(plt.gcf())  # Explicitly pass the figure
 
     st.title("Data Preparation for modeling")
     st.write("We want to predict which lead is more likely to be converted.")
@@ -107,7 +107,7 @@ def page_decision_tree_body():
     plt.figure(figsize=(20, 20))
     tree.plot_tree(d_tree_tuned, feature_names=features,
                    filled=True, fontsize=9, node_ids=True, class_names=True)
-    st.pyplot()
+    st.pyplot(plt.gcf())
 
 
 # Call the page_decision_tree_body function to display the content
