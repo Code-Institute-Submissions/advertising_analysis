@@ -5,11 +5,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, recall_score, make_scorer
+from sklearn.metrics import (
+    classification_report, confusion_matrix,
+    recall_score, make_scorer
+)
 from sklearn.model_selection import GridSearchCV
 
-# Load your data here
-data = pd.read_csv('/workspaces/advertising_analysis/jupyter_notebooks/advertising_dataset.csv')
+# Load the data
+data = pd.read_csv('/workspaces/advertising_analysis/'
+                   'jupyter_notebooks/advertising_dataset.csv')
 
 # Data processing and preparation steps
 
@@ -54,15 +58,18 @@ y_pred_test2 = rf_model_tuned.predict(X_test)
 
 # Streamlit UI
 
+
 def metrics_score(actual, predicted):
     st.text(classification_report(actual, predicted))
     cm = confusion_matrix(actual, predicted)
     plt.figure(figsize=(8, 5))
     sns.heatmap(cm, annot=True, fmt='.2f', xticklabels=[
-                'Not Converted', 'Converted'], yticklabels=['Not Converted', 'Converted'])
+                'Not Converted', 'Converted'],
+                yticklabels=['Not Converted', 'Converted'])
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     st.pyplot(plt.gcf())
+
 
 def page_random_forest_body():
     st.title("Random Forest")
@@ -81,7 +88,9 @@ def page_random_forest_body():
 
     st.title("Random Forest - Hyperparameter Tuning")
     st.write(
-        "We will use the class_weight hyperparameter with the value equal to {0: 0.3, 1: 0.7} which is approximately the opposite of the imbalance in the original data.")
+        "We will use the class_weight hyperparameter with the value equal to "
+        "{0: 0.3, 1: 0.7} which is approximately the opposite of the "
+        "imbalance in the original data.")
     st.write("Best parameters:", grid_obj.best_params_)
     st.title("Random Forest Model Evaluation - After Tuning")
     st.subheader("Performance on the training data:")
@@ -89,6 +98,17 @@ def page_random_forest_body():
     st.subheader("Performance on the testing data:")
     metrics_score(y_test, y_pred_test2)
 
+    st.write("In summary, the initial model showed high accuracy and perfect "
+             "scores on the training data, but the testing data performance "
+             "indicated some imbalance-related issues, particularly in terms "
+             "of recall for class 1. After hyperparameter tuning, the model's "
+             "overall performance improved, with better balance between "
+             "precision and recall for both classes. While the final model's "
+             "accuracy increased slightly, it still faces challenges in "
+             "accurately predicting conversions. Further experimentation and "
+             "feature engineering might be beneficial for improving this "
+             "model's performance.")
+
+
 # Call the page_random_forest_body function to display the content
 page_random_forest_body()
-

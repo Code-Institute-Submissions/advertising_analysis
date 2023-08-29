@@ -5,13 +5,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import classification_report, confusion_matrix, recall_score, make_scorer
+from sklearn.metrics import (
+    classification_report, confusion_matrix,
+    recall_score, make_scorer
+)
 from sklearn.model_selection import GridSearchCV
 from sklearn import tree
 
-# Load your data here
-data = pd.read_csv(
-    '/workspaces/advertising_analysis/jupyter_notebooks/advertising_dataset.csv')
+# Load the data
+data = pd.read_csv('/workspaces/advertising_analysis/'
+                   'jupyter_notebooks/advertising_dataset.csv')
 
 # Data processing and preparation steps
 
@@ -59,7 +62,8 @@ def metrics_score(actual, predicted):
     cm = confusion_matrix(actual, predicted)
     plt.figure(figsize=(8, 5))
     sns.heatmap(cm, annot=True, fmt='.2f', xticklabels=[
-                'Not Converted', 'Converted'], yticklabels=['Not Converted', 'Converted'])
+                'Not Converted', 'Converted'],
+                yticklabels=['Not Converted', 'Converted'])
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     st.pyplot(plt.gcf())
@@ -78,6 +82,8 @@ def page_decision_tree_body():
         plt.tight_layout()
         plt.title(variable)
     st.pyplot(plt.gcf())
+    st.write("As is evidenced above there are significant outliers in data "
+             "concerning website visits and page views per visit.")
 
     st.title("Data Preparation for modeling")
     st.write("We want to predict which lead is more likely to be converted.")
@@ -93,15 +99,18 @@ def page_decision_tree_body():
 
     # Heatmap visualization
     plt.figure(figsize=(8, 5))
-    sns.heatmap(confusion_matrix(y_test, y_pred_test2), annot=True, fmt='.2f', xticklabels=[
-                'Not Converted', 'Converted'], yticklabels=['Not Converted', 'Converted'])
+    sns.heatmap(confusion_matrix(y_test, y_pred_test2), annot=True, fmt='.2f',
+                xticklabels=['Not Converted', 'Converted'],
+                yticklabels=['Not Converted', 'Converted'])
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     st.pyplot(plt.gcf())
 
     st.title("Decision Tree - Hyperparameter Tuning")
     st.write(
-        "We will use the class_weight hyperparameter with the value equal to {0: 0.3, 1: 0.7} which is approximately the opposite of the imbalance in the original data.")
+        "We will use the class_weight hyperparameter with the value equal to "
+        "{0: 0.3, 1: 0.7} which is approximately the opposite of the "
+        "imbalance in the original data.")
     st.write("Best parameters:", grid_obj.best_params_)
     st.title("Decision Tree Model Evaluation - After Tuning")
     st.subheader("Performance on the training data:")
@@ -111,10 +120,22 @@ def page_decision_tree_body():
 
     st.title("Visualizing the Decision Tree")
     features = list(X.columns)
-    plt.figure(figsize=(20, 20))
+    plt.figure(figsize=(30, 25))
     tree.plot_tree(d_tree_tuned, feature_names=features,
-                   filled=True, fontsize=9, node_ids=True, class_names=True)
+                   filled=True, fontsize=12, node_ids=True, class_names=True)
     st.pyplot(plt.gcf())
+
+    st.write("Note: Blue leaves represent the converted leads, while the "
+             "orange leaves represent the unconverted leads. The more the "
+             "number of observationns in a leaf, the darker its colour gets.")
+
+    st.write("In summary, the Decision Tree model, showed initial high "
+             "accuracy and perfect scores on the training data. After "
+             "hyperparameter tuning, the model's overall performance became  "
+             "more balanced but still faced challenges in accurately "
+             "predicting conversions. Further work on feature engineering "
+             " and possibly handling outliers could contribute to "
+             "improved model performance.")
 
 
 # Call the page_decision_tree_body function to display the content

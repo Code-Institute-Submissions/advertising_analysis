@@ -41,7 +41,8 @@ def page_bivariate_analysis_body():
             st.pyplot(heatmap_fig)  # Pass the figure explicitly to st.pyplot()
 
         else:
-            st.error("Please select at least two numerical variables for analysis.")
+            st.error("Please select at least two numerical variables for "
+                     "analysis.")
 
     else:
         st.write("Select at least two columns for bivariate analysis.")
