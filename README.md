@@ -13,9 +13,11 @@ In the terminal type <code>streamlit run app.py</code>
 
 Deployment on Heroku
 
-1.  heroku login -i 
-2.  email & API Key
+1.  <code>heroku login -i</code>
+2.  Email & API Key
 3.  <code>heroku stack:set heroku-20 -a jws-advertising-analysis</code>
+
+<https://jws-advertising-analysis-576a7866f352.herokuapp.com/>
 
 ## Business Requirements
 
