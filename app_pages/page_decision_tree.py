@@ -21,8 +21,7 @@ Y = data['status']
 X = pd.get_dummies(X, drop_first=True)
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.30, random_state=1
-)
+    X, Y, test_size=0.30, random_state=1)
 
 # Decision Tree model building
 d_tree = DecisionTreeClassifier()
@@ -63,7 +62,7 @@ def metrics_score(actual, predicted):
                 'Not Converted', 'Converted'], yticklabels=['Not Converted', 'Converted'])
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
-    st.pyplot(plt.gcf())  # Explicitly pass the figure
+    st.pyplot(plt.gcf())
 
 
 def page_decision_tree_body():
@@ -78,7 +77,7 @@ def page_decision_tree_body():
         plt.boxplot(data[variable], whis=1.5)
         plt.tight_layout()
         plt.title(variable)
-    st.pyplot(plt.gcf())  # Explicitly pass the figure
+    st.pyplot(plt.gcf())
 
     st.title("Data Preparation for modeling")
     st.write("We want to predict which lead is more likely to be converted.")
@@ -91,6 +90,14 @@ def page_decision_tree_body():
     metrics_score(y_train, y_pred_train1)
     st.subheader("Performance on the testing data:")
     st.text(classification_report(y_test, y_pred_test))
+
+    # Heatmap visualization
+    plt.figure(figsize=(8, 5))
+    sns.heatmap(confusion_matrix(y_test, y_pred_test2), annot=True, fmt='.2f', xticklabels=[
+                'Not Converted', 'Converted'], yticklabels=['Not Converted', 'Converted'])
+    plt.ylabel('Actual')
+    plt.xlabel('Predicted')
+    st.pyplot(plt.gcf())
 
     st.title("Decision Tree - Hyperparameter Tuning")
     st.write(
