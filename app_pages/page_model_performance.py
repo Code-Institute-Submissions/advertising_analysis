@@ -24,7 +24,7 @@ def page_model_performance_body():
     )
 
     image_path = (
-        "/assets/images/feature_importance.png"
+        "assets/images/feature_importance.png"
     )
     st.image(image_path, caption="Feature Importance")
 
