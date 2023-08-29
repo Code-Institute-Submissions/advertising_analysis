@@ -12,8 +12,7 @@ from sklearn.metrics import (
 from sklearn.model_selection import GridSearchCV
 
 # Load the data
-data = pd.read_csv('/workspaces/advertising_analysis/'
-                   'jupyter_notebooks/advertising_dataset.csv')
+data = pd.read_csv('jupyter_notebooks/advertising_dataset.csv')
 
 # Data processing and preparation steps
 
